@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="{{ page.meta_description }}" />
+  <meta name="keywords" content="{{ page.meta_keywords }}" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>{{ store.name }} &mdash; {{ page.name }}</title>
+
+  <!-- Included CSS Files -->
+  <!-- Foundation CSS -->
+  <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/stylesheets/foundation.min.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css" />
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  {{ head_content }}
+</head>
+<body id="{{ page.permalink }}-page" class="{{ page.permalink }} {{ page.category }}">
+  <header>
+    <!-- Search & Cart -->
+    <div class="row margin_bottom_2">
+      <div class="four columns mobile-two">
+        <div class="row collapse">
+          <div class="twelve columns">
+            <!-- Search -->
+            {% if theme.show_search %}
+            <form id="search_form" action="/products" method="get">
+              <div class="eight mobile-three columns">
+                <input type="text" id="search_field" name="search" />
+              </div>
+              <div class="four mobile-one columns">
+                <a class="button expand postfix">Search</a>
+              </div>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="four columns align_right">
+        <!-- Cart -->
+        <div id="cart_button" {% if page.full_url contains '/cart' %}class="current"{% endif %}>
+            <a href="/cart" id="open_cart">Cart
+              <span id="cart_info" class="clearfix">
+                <span id="cart_count">{{ cart.item_count }}</span><span id="cart_divider"> | </span><span id="cart_total">{{ cart.total | money_with_sign }}</span>
+              </span>
+            </a>
+          </div>
+      </div>
+    </div>
+    <!-- Logo -->
+    <div class="row margin_bottom_2">
+      <div class="twelve columns align_center">
+        <strong id="logo" {% if theme.logo != blank %} class="image" {% else %} class="text" {% endif %}>
+          <a href="/" id="store_home" title="{{ store.name | escape }}">{% if theme.logo %}<img src="{{ theme.logo.url }}" alt="{{ store.name }}" {% if theme.logo.width > 150 %}width="150"{% endif %} />{% else %}{{ store.name | escape }}{% endif %}</a>
+        </strong>
+        </div>
+      </div>
+    </div>
+    <!-- Nav -->
+    <div class="row margin_bottom_2">
+      <div class="twelve columns align_center menu">
+        <!-- Home -->
+        <span {% if page.full_url contains '/products' %}class="current"{% endif %}><a href="/products">Home</a></span>
+        <!-- Categories -->
+        {% for category in categories.active %}
+        <span class="page {% if page.full_url contains category.url %}current{% endif %}">{{ category | link_to }}</span>
+        {% endfor %}
+        <!-- Pages -->
+        {% for page in pages.all %}
+        <span {% if page.full_url contains page.url %}class="current"{% endif %}>{{ page | link_to }}</span>
+        {% endfor %}
+        <!-- Contact -->
+        <span {% if page.url == '/contact' %}class="current"{% endif %}>{{ pages.contact | link_to }}</span>
+        {% if store.website != blank %}
+        <a href="{{ store.website }}">Back to Site</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <!-- Artists -->
+  {% if artists.active != blank %}
+  <ul id="artists_nav_list" class="clearfix">
+    <li>Artists</li>
+    {% for artist in artists.active %}
+    <li class="page {% if page.full_url contains artist.url %}current{% endif %}">{{ artist | link_to }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <!-- Content -->
+  {% if page.category == 'custom' %}
+  <div id="main" class="row">
+  <section id="content" class="twelve columns"> 
+    <div class="custom_page">
+      <h1>{{ page.name }}</h1>   
+      {{ page_content | paragraphs }}
+    </div>
+  </section>
+  </div>
+  {% else %}
+    {{ page_content }}
+  {% endif %}
+
+  <footer class="margin_bottom_2">
+    <div class="row">
+      <hr/>
+      <div class="four mobile-two columns">
+        <!-- Sitemap -->
+        <ul>
+          <!-- Categories -->
+          {% for category in categories.active %}
+          <li class="page">{{ category | link_to }}</li>
+          {% endfor %}
+          <!-- Pages -->
+          {% for page in pages.all %}
+          <li>{{ page | link_to }}</li>
+          {% endfor %}
+          <!-- Contact -->
+          <li>{{ pages.contact | link_to }}</li>
+          {% if store.website != blank %}
+          <a href="{{ store.website }}">Back to Site</a>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="four mobile-two columns align_center">
+        &copy; Saldum 2012
+      </div>
+      <div class="four mobile-four columns align_right">
+        <!-- Social networks -->
+        <!-- Facebook -->
+        <a href="http://www.facebook.com/phil.saldum"><img src="http://cdn1.iconfinder.com/data/icons/aquaticus/24%20X%2024/facebook.png" alt="Facebook" /></a>
+        <!-- Twitter -->
+        <a href="http://www.twitter.com/saldum_com"><img src="http://cdn1.iconfinder.com/data/icons/aquaticus/24%20X%2024/twitter.png" alt="Twitter" /></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Included JS Files -->
+  <!-- Foundation JS -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js" type="text/javascript"></script>
+  <script src="{{ 'prototype' | theme_js_url }}" type="text/javascript"></script>
+  <script src="{{ 'store' | theme_js_url }}" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+/*------------------------------------------------------------
+
+Theme:  Basic Saldum
+Author: Saldum
+        http://saldumers.com
+
+        Copyright 2013 Saldum
+
+------------------------------------------------------------*/
+
+/*============================================================
+ Clear Fixes
+============================================================*/
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+.clearfix:after {
+    clear: both;
+}
+
+/*============================================================
+ Base
+============================================================*/
+
+/* --- Align --- */
+.align_center { text-align: center; }
+.align_right { text-align: right; }
+.align_left { text-align: left; }
+
+/* --- Float --- */
+.left { float: left; }
+.right { float: right; }
+
+/* --- List --- */
+ul, ol {
+  list-style: none;
+}
+
+/* --- Margins --- */
+.margin_bottom_2 { margin-bottom: 2em !important; }
+
+/* --- Paddings --- */
+
+
+/*============================================================
+ Buttons
+============================================================*/
+
+
+
+/*============================================================
+ Default Type Styles
+============================================================*/
+
+
+/*============================================================
+ Header
+============================================================*/
+
+header {
+  padding-top: 2em;
+}
+
+.menu span {
+  margin-right: 2em;
+}
+@media (max-width:767px) {
+  .menu span {
+    margin-right: 1em;
+  }
+}
+
+.menu span:hover {
+  text-decoration: underline;
+}
+
+.current {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
+/*============================================================
+ Landing Layout
+============================================================*/
+
+
+
+/*============================================================
+ Footer
+============================================================*/
+
+
+/*============================================================
+ Cart
+============================================================*/
+
+.cart_total_label {
+  padding-right: 0.5em;
+}
+
+.quantity_input {
+  width: 16.66667% !important;
+  margin: 0 auto !important;
+  text-align: center;
+}
+@media (max-width:767px) {
+  .quantity_input {
+    width: 50% !important;
+  }
+}
+
+.shipping_label {
+  margin-right: 0.5em;
+}
+
+/*============================================================
+ Checkout layout
+============================================================*/
+
+
+  
+
+/*============================================================
+  Basic Styles - used for the simple controls.
+============================================================*/
+
+
+
+/*============================================================
+  Custom Styles - add and override styles below.
+============================================================*/
+
+
+
+/*============================================================
+  BigCartel variables
+============================================================*/
+
+/*
+{{ theme.header_color }}
+{{ theme.font_color }}
+{{ theme.highlight_color }}
+{{ theme.border_color }}
+{{ theme.sidebar_link_rollover }}
+{{ theme.sidebar_border_color }}
+{% if theme.fixed_sidebar %}
+{% endif %}
+{{ theme.sidebar_color }}
+{{ theme.background_color }}
+{{ theme.link_color }}
+{% if theme.product_list_size == 'medium' %}
+{% endif %}
+{{ theme.header_font | font_family_for_group }}
+
+*/
+
